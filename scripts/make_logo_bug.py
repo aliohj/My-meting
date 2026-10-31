@@ -19,7 +19,8 @@ scale = target_w / logo.width
 target_h = round(logo.height * scale)
 alpha = alpha.resize((target_w, target_h), Image.LANCZOS, reducing_gap=3.0)
 
-pad = 24
+k = target_w / 200.0  # effects tuned at 200px logo width; scale with size
+pad = round(24 * k)
 W, H = target_w + pad * 2, target_h + pad * 2
 mask = Image.new("L", (W, H), 0)
 mask.paste(alpha, (pad, pad))
@@ -31,7 +32,7 @@ def layer(radius, opacity, dy):
     m = m.filter(ImageFilter.GaussianBlur(radius))
     return np.array(m, dtype=np.float32) / 255.0 * opacity
 
-sh = 1 - (1 - layer(1.6, 0.55, 1)) * (1 - layer(9, 0.38, 2))
+sh = 1 - (1 - layer(1.6 * k, 0.55, round(1 * k))) * (1 - layer(9 * k, 0.38, round(2 * k)))
 fg = np.array(mask, dtype=np.float32) / 255.0 * 0.96
 
 # Composite white fg over black shadow (straight alpha)
