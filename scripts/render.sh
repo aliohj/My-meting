@@ -10,10 +10,10 @@ FADE_IN_START=0.4;  FADE_IN_DUR=0.8
 FADE_OUT_START=12.7; FADE_OUT_DUR=0.6
 
 if [[ "$RES" == "1080" ]]; then
-  K=2.25; LOGO_W=450; OUT=output/quartz-video-logo-1080p.mp4
+  K=2.25; LOGO_W=585; OUT=output/quartz-video-logo-1080p.mp4
   PRE="[0:v]scale=1920:1080:flags=lanczos,setsar=1[base]"
 else
-  K=1; LOGO_W=200; OUT=output/quartz-video-logo.mp4
+  K=1; LOGO_W=260; OUT=output/quartz-video-logo.mp4
   PRE="[0:v]null[base]"
 fi
 BUG=$(mktemp --suffix=.png)

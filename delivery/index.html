@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>فيديو كوارتز بالشعار</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Single dark world: the cocoa fabric of the video's final scene, champagne-gold accent from the jewellery.
+       Layout: one column, player first, then two download rows. */
+    color-scheme: dark;
+    --bg: #1b1613;
+    --surface: #26201b;
+    --line: #3a3029;
+    --text: #f3ece4;
+    --muted: #b3a597;
+    --gold: #d9b56c;
+    --font-display: "Amiri", "Noto Naskh Arabic", "Times New Roman", serif;
+    --font-body: "IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--text); }
+  body { font-family: var(--font-body); font-size: 16px; line-height: 1.6; }
+  main { max-width: 880px; margin: 0 auto; padding: 32px 20px 48px; display: grid; gap: 24px; }
+  header { display: grid; gap: 4px; }
+  h1 { font-family: var(--font-display); font-weight: 700; font-size: 34px; line-height: 1.2; margin: 0; text-wrap: balance; }
+  .sub { color: var(--muted); margin: 0; max-width: 62ch; }
+  video { width: 100%; aspect-ratio: 16 / 9; display: block; background: #000; border-radius: 10px; border: 1px solid var(--line); }
+  .files { display: grid; gap: 12px; }
+  .file { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 20px;
+          background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; }
+  .file.primary { border-color: var(--gold); }
+  .file h2 { margin: 0; font-size: 17px; font-weight: 600; }
+  .meta { margin: 2px 0 0; color: var(--muted); font-size: 14px; font-variant-numeric: tabular-nums; }
+  .meta bdi { direction: ltr; }
+  button { font: inherit; font-weight: 600; font-size: 15px; cursor: pointer; border-radius: 8px; padding: 10px 18px;
+           border: 1px solid var(--gold); background: transparent; color: var(--gold); min-width: 132px; }
+  .file.primary button { background: var(--gold); color: #1b1613; }
+  button:hover { filter: brightness(1.08); }
+  button:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; }
+  button[disabled] { opacity: .6; cursor: progress; }
+  .status { margin: 0; min-height: 1.6em; color: var(--muted); font-size: 14px; }
+  .details { border-top: 1px solid var(--line); padding-top: 18px; display: grid; gap: 6px; color: var(--muted); font-size: 15px; }
+  .details h3 { margin: 0 0 4px; color: var(--text); font-size: 15px; font-weight: 600; }
+  .details ul { margin: 0; padding-inline-start: 20px; display: grid; gap: 4px; }
+  .details bdi { direction: ltr; font-variant-numeric: tabular-nums; }
+  @media (max-width: 480px) { h1 { font-size: 28px; } .file button { width: 100%; } }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>فيديو كوارتز بالشعار</h1>
+    <p class="sub">النسخة النهائية مع شعار كوارتز في الزاوية السفلية اليمنى. شغّل الفيديو هنا أو نزّل النسخة اللي تحتاجها.</p>
+  </header>
+
+  <video src="quartz-video-logo-1080p.mp4" controls playsinline preload="metadata"></video>
+
+  <section class="files" aria-label="ملفات التنزيل">
+    <div class="file primary">
+      <div>
+        <h2>نسخة 1080p (مقترحة للنشر)</h2>
+        <p class="meta"><bdi>1920×1080</bdi> · <bdi>MP4</bdi> · <bdi>14.2 MB</bdi></p>
+      </div>
+      <button type="button" id="dl-1080" data-file="quartz-video-logo-1080p.mp4" data-name="quartz-video-logo-1080p.mp4">تنزيل 1080p</button>
+    </div>
+    <div class="file">
+      <div>
+        <h2>نسخة بدقة المصدر الأصلي</h2>
+        <p class="meta"><bdi>854×480</bdi> · <bdi>MP4</bdi> · <bdi>3.6 MB</bdi></p>
+      </div>
+      <button type="button" id="dl-native" data-file="quartz-video-logo.mp4" data-name="quartz-video-logo-480p.mp4">تنزيل 480p</button>
+    </div>
+    <p class="status" id="status" role="status" aria-live="polite"></p>
+  </section>
+
+  <section class="details">
+    <h3>تفاصيل التعديل</h3>
+    <ul>
+      <li>الشعار في الزاوية السفلية اليمنى، تقريباً 30% من عرض الفيديو، وبعيد عن الحواف بهامش آمن.</li>
+      <li>خلف الشعار ظل ناعم عشان يبان على القماش الأبيض وعلى الخلفية البنية.</li>
+      <li>يظهر تدريجياً من <bdi>0.4</bdi> ثانية، ويختفي قبل <bdi>13.3</bdi> ثانية عشان ما يطلع مع الشعار الأصلي في نهاية الفيديو.</li>
+      <li>المدة <bdi>15</bdi> ثانية، <bdi>24</bdi> إطار في الثانية، والصوت الأصلي بدون أي تعديل.</li>
+    </ul>
+  </section>
+</main>
+<script>
+  const statusEl = document.getElementById("status");
+  const buttons = Array.from(document.querySelectorAll("button[data-file]"));
+  const fallback = "التنزيل المباشر ما يشتغل في هذا العرض. افتح الصفحة من claude.ai في المتصفح وجرّب مرة ثانية.";
+  let downloads = null;
+
+  if (window.claude && typeof window.claude.use === "function") {
+    window.claude.use("downloads").then((ns) => {
+      downloads = ns;
+      if (!ns) statusEl.textContent = fallback;
+    }).catch(() => { statusEl.textContent = fallback; });
+  }
+
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      if (!downloads) { statusEl.textContent = fallback; return; }
+      const label = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = "جاري التجهيز…";
+      statusEl.textContent = "";
+      try {
+        const res = await fetch(btn.dataset.file);
+        if (!res.ok) throw { code: "fetch" };
+        const blob = await res.blob();
+        await downloads.save({ filename: btn.dataset.name, data: blob });
+        statusEl.textContent = "تم: الملف " + btn.dataset.name + " انحفظ.";
+      } catch (err) {
+        const code = err && err.code;
+        if (code === "declined") statusEl.textContent = "انلغى التنزيل.";
+        else if (code === "rate_limited") statusEl.textContent = "فيه طلب تنزيل مفتوح. انتظر لحظة وجرّب مرة ثانية.";
+        else if (code === "fetch") statusEl.textContent = "ما قدرت أحمّل الملف. حدّث الصفحة وجرّب مرة ثانية.";
+        else statusEl.textContent = fallback;
+      } finally {
+        btn.disabled = false;
+        btn.textContent = label;
+      }
+    });
+  });
+</script>
+</body>
+</html>
