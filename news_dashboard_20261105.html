@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;700&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#141414;font-family:'IBM Plex Sans Arabic',Tahoma,Arial,sans-serif;min-height:100vh;padding:24px 16px 140px;direction:rtl;color:#F5F1E8;}
+h1{text-align:center;font-size:22px;font-weight:700;color:#F5F1E8;margin-bottom:4px;}
+.gold{color:#DAA761;}
+.sub{text-align:center;font-size:12px;color:#8a8478;margin-bottom:22px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px;max-width:900px;margin:0 auto;}
+.card{background:#1d1d1d;border:2px solid #2a2a2a;border-radius:14px;padding:16px;cursor:pointer;transition:border-color .15s,background .15s;position:relative;}
+.card:hover{border-color:#DAA761;}
+.card.selected{border-color:#DAA761;background:#DAA76118;}
+.card-tag{display:inline-block;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;margin-bottom:8px;}
+.tag-hot{background:#DAA76133;color:#DAA761;}
+.tag-new{background:#F5F1E822;color:#F5F1E8;}
+.tag-safe{background:#052e16;color:#4ade80;}
+.tag-paid{background:#1c1400;color:#fbbf24;}
+.card-emoji{font-size:26px;margin-bottom:6px;display:block;}
+.card-title{font-size:15px;font-weight:700;color:#fff;margin-bottom:5px;line-height:1.4;}
+.card-desc{font-size:12px;color:#9a9488;line-height:1.8;}
+.date-badge{position:absolute;top:12px;left:12px;font-size:10px;color:#6b665c;font-weight:500;}
+.note{max-width:900px;margin:20px auto 0;font-size:11px;color:#6b665c;text-align:center;line-height:1.8;}
+.bar{position:fixed;bottom:0;left:0;right:0;background:#0d0d0d;border-top:2px solid #DAA761;padding:12px 16px;display:none;flex-direction:column;gap:8px;z-index:99;}
+.bar.show{display:flex;}
+.bar-label{color:#aaa;font-size:11px;font-weight:700;}
+.bar-text{background:#1a1a1a;border:1px solid #333;border-radius:8px;padding:10px 12px;color:#fff;font-size:13px;font-weight:700;text-align:right;width:100%;}
+.bar-hint{color:#666;font-size:11px;text-align:center;}
+</style>
+</head>
+<body>
+<h1>🗞️ منصة الأخبار <span class="gold">الإعلانات الخارجية والشاشات</span></h1>
+<p class="sub">نوفمبر 2026 — اضغط على خبر ثم أرسل النص لكلود</p>
+<div class="grid">
+
+<div class="card" onclick="pick(this,'اعمل كاروسيل عن: البحرين تعمل على استراتيجية وطنية جديدة للإعلانات الخارجية بالتعاون مع Apex Advisory عبر وزارة شؤون البلديات والزراعة')">
+<div class="date-badge">سبتمبر 2025</div>
+<span class="card-tag tag-hot">🔥 ساخن</span><span class="card-emoji">🇧🇭</span>
+<div class="card-title">استراتيجية وطنية جديدة للإعلانات الخارجية في البحرين</div>
+<div class="card-desc">وزارة شؤون البلديات والزراعة استعانت بـ Apex Advisory لبناء خطة شاملة للقطاع، مرتبطة بأهداف المدن الذكية.</div>
+</div>
+
+<div class="card" onclick="pick(this,'اعمل كاروسيل عن: لوحات الطرق التقليدية في البحرين تتجه لتحل محلها شاشات رقمية ذكية (تقرير GDN)')">
+<div class="date-badge">بدون تاريخ مؤكد</div>
+<span class="card-tag tag-new">✨ جديد</span><span class="card-emoji">📺</span>
+<div class="card-title">لوحات الطرق تتحول إلى شاشات رقمية</div>
+<div class="card-desc">تقرير في GDN يتحدث عن استبدال اللوحات التقليدية بشاشات ذكية، وطموح أن تصير البحرين مركزاً خليجياً للإعلان الرقمي.</div>
+</div>
+
+<div class="card" onclick="pick(this,'اعمل كاروسيل عن: منظمة World Out of Home تطلق أول مقياس عالمي لإنفاق الإعلانات الخارجية البرمجية (Programmatic DOOH)')">
+<div class="date-badge">يونيو 2026</div>
+<span class="card-tag tag-hot">🔥 ساخن</span><span class="card-emoji">🌍</span>
+<div class="card-title">أول مقياس عالمي لإنفاق DOOH البرمجي</div>
+<div class="card-desc">منظمة World Out of Home أطلقت مقياساً عالمياً لحجم الإنفاق على الشاشات الخارجية المباعة برمجياً.</div>
+</div>
+
+<div class="card" onclick="pick(this,'اعمل كاروسيل عن: الإعلان الخارجي البرمجي يصير جزءاً من منصات الشراء الرقمية، وتوقعات eMarketer بتجاوز الإنفاق الأمريكي 1.2 مليار دولار في 2026')">
+<div class="date-badge">2026</div>
+<span class="card-tag tag-hot">🔥 ساخن</span><span class="card-emoji">📈</span>
+<div class="card-title">شراء الشاشات الخارجية يدخل منصات الإعلان الرقمي</div>
+<div class="card-desc">حسب eMarketer: منصات مثل DV360 وThe Trade Desk تتيح شراء مواقع الإعلان الخارجي، والإنفاق البرمجي الأمريكي متوقع أن يتجاوز 1.2 مليار دولار.</div>
+</div>
+
+<div class="card" onclick="pick(this,'اعمل كاروسيل عن: الذكاء الاصطناعي يحوّل الإعلان الخارجي الرقمي من وعي بالعلامة إلى قناة أداء')">
+<div class="date-badge">مايو 2026</div>
+<span class="card-tag tag-new">✨ جديد</span><span class="card-emoji">🤖</span>
+<div class="card-title">الذكاء الاصطناعي يحوّل DOOH إلى قناة أداء</div>
+<div class="card-desc">تقارير ترى أن الذكاء الاصطناعي ينقل الشاشات الخارجية من مجرد ظهور للعلامة إلى إعلانات تُقاس نتائجها.</div>
+</div>
+
+<div class="card" onclick="pick(this,'اعمل كاروسيل عن: إطلاق منصة Signpx الشاملة للافتات الرقمية')">
+<div class="date-badge">1 أكتوبر 2026</div>
+<span class="card-tag tag-new">✨ جديد</span><span class="card-emoji">🖥️</span>
+<div class="card-title">إطلاق منصة Signpx للافتات الرقمية</div>
+<div class="card-desc">منصة متكاملة لإدارة اللافتات الرقمية أُعلن عن إطلاقها في بداية أكتوبر.</div>
+</div>
+
+<div class="card" onclick="pick(this,'اعمل كاروسيل عن: OAAA تطلق تعهد الشفافية للإعلان الخارجي البرمجي لبناء الثقة في الشراء الآلي')">
+<div class="date-badge">2026</div>
+<span class="card-tag tag-safe">🛡️ ثقة</span><span class="card-emoji">🤝</span>
+<div class="card-title">تعهد شفافية للإعلان الخارجي البرمجي</div>
+<div class="card-desc">OAAA أطلقت تعهداً لبناء الثقة في عمليات الشراء الآلي، وسط نقاش حول مصداقية القياس.</div>
+</div>
+
+<div class="card" onclick="pick(this,'اعمل كاروسيل عن: دبي تدرس قيوداً على الإعلانات الخارجية تشمل استخدام اللغة العربية والالتزام بالقيم المحلية')">
+<div class="date-badge">بدون تاريخ مؤكد</div>
+<span class="card-tag tag-safe">🛡️ تنظيم</span><span class="card-emoji">📜</span>
+<div class="card-title">دبي وضوابط جديدة للإعلانات الخارجية</div>
+<div class="card-desc">خبر في Khaleej Times عن قيود تشمل النص العربي والالتزام بالقيم المحلية. تأكد من التاريخ قبل النشر.</div>
+</div>
+
+<div class="card" onclick="pick(this,'اعمل كاروسيل عن: مدى ميديا تمنح PHI Advertising حقوق محفظة إعلانات خارجية كبيرة في دبي')">
+<div class="date-badge">أبريل 2026</div>
+<span class="card-tag tag-paid">💰 صفقات</span><span class="card-emoji">🏙️</span>
+<div class="card-title">صفقة محفظة إعلانات خارجية في دبي</div>
+<div class="card-desc">Mada Media منحت PHI Advertising حقوق محفظة كبيرة، مع مناقصات أخرى مخطط لها خلال 2026.</div>
+</div>
+
+</div>
+<h1 style="margin-top:32px;font-size:18px">🌍 أفكار <span class="gold">عالمية ومجتمعية</span></h1>
+<p class="sub">مو لازم أخبار رسمية — حملات، اتجاهات، ومواسم</p>
+<div class="grid">
+<div class="card" onclick="pick(this,'اعمل كاروسيل عن: لوحة Loveholidays اللي فيها شاطئ حقيقي وشخص يتشمس، وكيف جابت 1.8 مليون مشاهدة خلال 24 ساعة، والدرس منها للإعلانات الخارجية')">
+<div class="date-badge">2026</div>
+<span class="card-tag tag-hot">🔥 ساخن · حملات عالمية</span><span class="card-emoji">🏖️</span>
+<div class="card-title">لوحة إعلانية فيها شاطئ حقيقي وشخص يتشمس</div>
+<div class="card-desc">Loveholidays مع وكالة ARK ركّبت شاطئاً حقيقياً داخل لوحة، وانتشرت على تيك توك بـ 1.8 مليون مشاهدة خلال 24 ساعة، والناس تتجادل: حقيقي ولا CGI؟</div>
+</div>
+
+<div class="card" onclick="pick(this,'اعمل كاروسيل عن: قصة حملة Selleys اللي حوّلت ميزانية ضيقة إلى لوحة تفاعلية لافتة، والدرس للشركات الصغيرة')">
+<div class="date-badge">مايو 2026</div>
+<span class="card-tag tag-new">✨ جديد · حملات عالمية</span><span class="card-emoji">🎯</span>
+<div class="card-title">ميزانية ضيقة صنعت حملة لافتة (Selleys)</div>
+<div class="card-desc">الميزانية الضيقة أجبرت الفريق يجمع عدة منتجات في لوحة واحدة تفاعلية، وصارت حديث الناس. الفكرة أقوى من الميزانية.</div>
+</div>
+
+<div class="card" onclick="pick(this,'اعمل كاروسيل عن: ليش حملة صغيرة بفكرة ذكية ممكن تتفوق على لوحة إعلانية غالية، بدون ذكر أرقام غير مؤكدة')">
+<div class="date-badge">ديسمبر 2025</div>
+<span class="card-tag tag-new">💡 فكرة · حملات عالمية</span><span class="card-emoji">💸</span>
+<div class="card-title">حملة بـ 300 دولار أثرها أكبر من لوحة بـ 100 ألف</div>
+<div class="card-desc">مقال عن حملة بسيطة التكلفة حققت أثراً أكبر من لوحة ضخمة. مناسب لأصحاب المشاريع الصغيرة. (راجع المصدر قبل ذكر التفاصيل)</div>
+</div>
+
+<div class="card" onclick="pick(this,'اعمل كاروسيل عن: ليش اختيار موقع اللوحة الإعلانية مهم بقدر التصميم نفسه، مثال حملات ChatGPT')">
+<div class="date-badge">2026</div>
+<span class="card-tag tag-new">✨ جديد · حملات عالمية</span><span class="card-emoji">📍</span>
+<div class="card-title">المكان هو اللي يوصّل الرسالة مو التصميم بس</div>
+<div class="card-desc">تحليل لحملات لوحات OpenAI في ديتروت: اختيار موقع اللوحة قام بجزء من القصة اللي ما يقدر يقولها التصميم.</div>
+</div>
+
+<div class="card" onclick="pick(this,'اعمل كاروسيل عن: الشاشات الخارجية الذكية اللي تتغير حسب الوقت والطقس والبيانات الحية، وكيف تستفيد منها الأنشطة التجارية')">
+<div class="date-badge">2026</div>
+<span class="card-tag tag-new">📈 اتجاه · معلومات عالمية</span><span class="card-emoji">📡</span>
+<div class="card-title">اللوحات التفاعلية اللي تتفاعل مع محيطها</div>
+<div class="card-desc">اتجاه متنامي لشاشات تتغير حسب الوقت والطقس والبيانات الحية، بدل محتوى ثابت.</div>
+</div>
+
+<div class="card" onclick="pick(this,'اعمل كاروسيل عن: كيف تجهّز حملتك الإعلانية لموسم اليوم الوطني البحريني (16-17 ديسمبر) ومتى تحجز الشاشات الخارجية')">
+<div class="date-badge">16–17 ديسمبر 2026</div>
+<span class="card-tag tag-paid">📅 موسم · مجتمع البحرين</span><span class="card-emoji">🎆</span>
+<div class="card-title">اليوم الوطني البحريني: إجازة 16 و17 ديسمبر</div>
+<div class="card-desc">فرصة موسمية للمحتوى: حملات تهنئة وعروض. نصيحة: جهّز إعلانك من الحين لأن الحجز على الشاشات يزدحم في المواسم. (لا توجد رزنامة فعاليات 2026 مؤكدة بعد)</div>
+</div>
+
+<div class="card" onclick="pick(this,'اعمل كاروسيل عن: خطة إعلان بسيطة لأصحاب المشاريع الصغيرة في البحرين قبل موسم الجمعة البيضاء')">
+<div class="date-badge">2026</div>
+<span class="card-tag tag-paid">💰 نصيحة · مجتمع البحرين</span><span class="card-emoji">🛍️</span>
+<div class="card-title">الجمعة البيضاء قريبة: متى تبدأ إعلانك؟</div>
+<div class="card-desc">موسم عروض سنوي. محتوى توعوي لأصحاب المشاريع الصغيرة عن التخطيط المبكر. (ما لقيت عروض مؤكدة لهالسنة)</div>
+</div>
+
+<div class="card" onclick="pick(this,'اعمل كاروسيل عن: ليش المشاريع الصغيرة في البحرين تحتاج تجمع بين الإعلان الخارجي والسوشال ميديا لتبني حضورها')">
+<div class="date-badge">2026</div>
+<span class="card-tag tag-new">📈 اتجاه · مجتمع البحرين</span><span class="card-emoji">📱</span>
+<div class="card-title">شنو يشتغل مع المشاريع الصغيرة في البحرين؟</div>
+<div class="card-desc">مصادر عن السوق تشير لصعود الفيديو القصير والمؤثرين والتجارة عبر السوشال. دراسة جامعة البحرين تؤكد أهمية المحتوى الجذاب والإعلان المناسب للجمهور.</div>
+</div>
+
+</div>
+<p class="note">المصادر: نتائج بحث ويب (Pulse، EMARKETER، Consultancy-ME، GDN، Khaleej Times، AdTech Today). بعض الأخبار بدون تاريخ مؤكد أو قديمة نسبياً — راجع المصدر قبل النشر. ما لقيت أخبار بحرينية مؤكدة بتاريخ 2026.</p>
+<div class="bar" id="bar">
+<div class="bar-label">📌 الخبر المختار — انسخ النص التالي وأرسله لكلود:</div>
+<div class="bar-text" id="bar-text"></div>
+<div class="bar-hint">← اضغط على النص، حدده كله، ثم انسخه وأرسله</div>
+</div>
+<script>
+var sel=null;
+function pick(el,txt){if(sel&&sel!==el)sel.classList.remove('selected');el.classList.toggle('selected');sel=el.classList.contains('selected')?el:null;var bar=document.getElementById('bar');var bt=document.getElementById('bar-text');if(sel){bar.classList.add('show');bt.textContent=txt;}else{bar.classList.remove('show');}}
+document.getElementById('bar-text').addEventListener('click',function(){var r=document.createRange();r.selectNodeContents(this);var s=window.getSelection();s.removeAllRanges();s.addRange(r);});
+</script>
+</body>
+</html>
