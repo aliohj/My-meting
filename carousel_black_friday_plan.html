@@ -3,32 +3,47 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;700&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;700&family=IBM+Plex+Sans:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-body{background:#141414;font-family:'IBM Plex Sans Arabic',Tahoma,Arial,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;gap:24px;padding:24px 0;}
-.slide{width:1080px;height:1350px;background:#F5F1E8;display:none;flex-direction:column;overflow:hidden;color:#141414;}
+body{background:#0b0b0b;font-family:'IBM Plex Sans Arabic',Tahoma,Arial,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;gap:24px;padding:24px 0;}
+.slide{width:1080px;height:1350px;display:none;flex-direction:column;overflow:hidden;}
 .slide.active{display:flex;}
-.logo-slot{height:115px;margin-top:80px;flex-shrink:0;}
-.content{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 100px;text-align:center;}
-.kicker{font-size:34px;color:#6b665c;margin-bottom:48px;font-weight:500;}
-h1{font-size:96px;font-weight:500;line-height:1.35;}
-h2{font-size:84px;font-weight:500;line-height:1.35;margin-bottom:40px;}
-.t3{margin-bottom:70px;}
+.slide.light{background:#F5F1E8;color:#141414;}
+.slide.dark{background:#141414;color:#F5F1E8;}
+.slide.gold{background:#DAA761;color:#141414;}
+.logo-slot{height:115px;margin-top:70px;flex-shrink:0;}
+.content{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px 90px;text-align:center;}
+.kicker{font-size:34px;color:#DAA761;margin-top:20px;margin-bottom:30px;font-weight:500;}
+h1{font-size:92px;font-weight:500;line-height:1.35;}
+h2{font-size:80px;font-weight:500;line-height:1.35;margin-bottom:30px;}
+.t3{margin-bottom:56px;}
 .hl{background:#DAA761;color:#141414;padding:0 18px;border-radius:6px;}
-.sub{font-size:40px;line-height:1.7;color:#3a3a3a;margin-top:30px;font-weight:400;}
-.big{font-size:140px;margin-bottom:30px;}
-.arrow{margin-top:70px;width:96px;height:96px;border-radius:50%;background:#141414;color:#DAA761;font-size:48px;display:flex;align-items:center;justify-content:center;}
-.list{width:100%;}
-.li{display:flex;align-items:center;gap:32px;margin-bottom:44px;}
-.num{width:84px;height:84px;border-radius:50%;background:#DAA761;color:#141414;font-size:40px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'IBM Plex Sans',sans-serif;}
-.it{font-size:42px;line-height:1.5;text-align:right;flex:1;font-weight:500;}
-.tag{margin-top:60px;font-size:36px;color:#141414;border-top:3px solid #DAA761;padding-top:28px;font-weight:500;}
-.foot{padding:0 100px 70px;display:flex;align-items:center;justify-content:space-between;}
+.sub{font-size:40px;line-height:1.7;opacity:.85;margin-top:24px;}
+.sub b{font-weight:700;opacity:1;}
+.cards{width:100%;display:flex;flex-direction:column;gap:26px;}
+.card{background:#fff;border-radius:28px;display:flex;align-items:center;gap:28px;padding:26px 34px;box-shadow:0 10px 30px rgba(20,20,20,.08);border-right:12px solid #DAA761;}
+.cnum{font-family:'IBM Plex Sans',sans-serif;font-size:44px;font-weight:700;color:#DAA761;width:70px;direction:ltr;}
+.cic{width:96px;height:96px;border-radius:50%;background:#DAA761;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ctx{text-align:right;flex:1;}
+.ct{font-size:42px;font-weight:700;line-height:1.3;}
+.cd{font-size:29px;opacity:.65;margin-top:6px;}
+.tlist{position:relative;width:100%;display:flex;flex-direction:column;gap:34px;}
+.tline{position:absolute;right:52px;top:40px;bottom:40px;width:4px;background:#DAA761;opacity:.5;}
+.tl{display:flex;align-items:center;gap:34px;position:relative;}
+.tlic{width:104px;height:104px;border-radius:50%;background:#DAA761;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:8px solid #141414;}
+.tltx{text-align:right;background:#1f1f1f;border-radius:24px;padding:22px 32px;flex:1;}
+.tlw{font-size:30px;color:#DAA761;font-weight:700;}
+.tlt{font-size:40px;font-weight:500;margin-top:4px;line-height:1.4;}
+.bigic{width:330px;height:330px;border-radius:50%;background:#F5F1E8;display:flex;align-items:center;justify-content:center;margin-bottom:40px;}
+.dk{color:#141414;} .lt{color:#F5F1E8;}
+.tag{margin-top:50px;font-size:36px;border-top:3px solid currentColor;padding-top:26px;font-weight:500;}
+.foot{padding:0 90px 64px;display:flex;align-items:center;justify-content:space-between;}
 .progress{display:flex;gap:10px;}
-.progress span{width:44px;height:8px;border-radius:4px;background:#d9d3c4;}
-.progress span.on{background:#DAA761;}
-.handle{font-size:28px;color:#6b665c;direction:ltr;font-family:'IBM Plex Sans',sans-serif;}
+.progress span{width:44px;height:8px;border-radius:4px;background:currentColor;opacity:.2;}
+.progress span.on{background:#DAA761;opacity:1;}
+.gold .progress span.on{background:#141414;}
+.handle{font-size:28px;opacity:.65;direction:ltr;font-family:'IBM Plex Sans',sans-serif;}
 .nav{display:flex;gap:20px;align-items:center;flex-wrap:wrap;justify-content:center;}
 .nav-btn{background:#333;border:none;color:#fff;font-size:32px;width:72px;height:72px;border-radius:50%;cursor:pointer;}
 .nav-info{color:#888;font-size:24px;}
@@ -37,34 +52,51 @@ h2{font-size:84px;font-weight:500;line-height:1.35;margin-bottom:40px;}
 </style>
 </head>
 <body>
-<div class="slide active" id="s1">
-<div class="logo-slot"><!-- مساحة الشعار الرسمي: أضفه لاحقاً (270px عرض، 80px هامش علوي) --></div>
-<div class="content"><div class="kicker">لأصحاب المشاريع الصغيرة في البحرين</div><h1>خطة إعلان بسيطة<br>قبل <span class="hl">الجمعة البيضاء</span></h1><div class="sub">4 خطوات تبدأ فيها من الحين</div><div class="arrow">←</div></div>
+<div class="slide dark active" id="s1">
+<div class="logo-slot"><!-- مساحة الشعار الرسمي: أضفه لاحقاً --></div>
+<div class="content"><svg width="820" height="560" viewBox="0 0 820 560" fill="none">
+<defs><radialGradient id="glow" cx="50%" cy="40%" r="60%"><stop offset="0" stop-color="#DAA761" stop-opacity=".45"/><stop offset="1" stop-color="#DAA761" stop-opacity="0"/></radialGradient>
+<linearGradient id="scr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2a2a2a"/><stop offset="1" stop-color="#0d0d0d"/></linearGradient></defs>
+<ellipse cx="410" cy="230" rx="400" ry="260" fill="url(#glow)"/>
+<rect x="150" y="250" width="22" height="260" fill="#3a3a3a"/><rect x="648" y="250" width="22" height="260" fill="#3a3a3a"/>
+<rect x="60" y="40" width="700" height="300" rx="18" fill="#1c1c1c" stroke="#DAA761" stroke-width="6"/>
+<rect x="84" y="62" width="652" height="256" rx="8" fill="url(#scr)"/>
+<rect x="130" y="110" width="330" height="26" rx="13" fill="#F5F1E8"/>
+<rect x="130" y="156" width="250" height="26" rx="13" fill="#F5F1E8" opacity=".7"/>
+<rect x="130" y="222" width="150" height="48" rx="24" fill="#DAA761"/>
+<circle cx="585" cy="190" r="78" fill="#DAA761"/><circle cx="585" cy="190" r="52" fill="#141414"/><circle cx="585" cy="190" r="24" fill="#DAA761"/>
+<path d="M0 520h820" stroke="#333" stroke-width="3"/>
+<g fill="#222"><rect x="10" y="440" width="70" height="80"/><rect x="95" y="410" width="55" height="110"/><rect x="690" y="430" width="60" height="90"/><rect x="760" y="400" width="50" height="120"/></g>
+</svg><div class="kicker">لأصحاب المشاريع الصغيرة في البحرين</div><h1>خطة إعلان بسيطة<br>قبل <span class="hl">الجمعة البيضاء</span></h1><div class="sub">4 خطوات تبدأ فيها من الحين</div></div>
 <div class="foot"><div class="progress"><span class="on"></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span></div><div class="handle">@lumera.advertising</div></div>
 </div>
-<div class="slide" id="s2">
-<div class="logo-slot"><!-- مساحة الشعار الرسمي: أضفه لاحقاً (270px عرض، 80px هامش علوي) --></div>
-<div class="content"><div class="big">🤔</div><h2>ليش عروضك<br>ما توصل لناس؟</h2><div class="sub">في موسم الجمعة البيضاء الكل ينزّل عروضه بنفس الوقت.<br>اللي يبدأ بدري ويكرر رسالته، هو اللي يُتذكّر.</div></div>
+<div class="slide light" id="s2">
+<div class="logo-slot"><!-- مساحة الشعار الرسمي: أضفه لاحقاً --></div>
+<div class="content"><h2>ليش عروضك<br>ما توصل لناس؟</h2><svg width="860" height="460" viewBox="0 0 760 460" fill="none"><rect x="40" y="30" width="120" height="90" rx="12" fill="#e6dfce"/><rect x="56" y="48" width="60" height="10" rx="5" fill="#c9c1ac"/><rect x="56" y="70" width="88" height="10" rx="5" fill="#c9c1ac"/><circle cx="138" cy="96" r="9" fill="#c9c1ac"/><rect x="180" y="30" width="120" height="90" rx="12" fill="#e6dfce"/><rect x="196" y="48" width="60" height="10" rx="5" fill="#c9c1ac"/><rect x="196" y="70" width="88" height="10" rx="5" fill="#c9c1ac"/><circle cx="278" cy="96" r="9" fill="#c9c1ac"/><rect x="320" y="30" width="120" height="90" rx="12" fill="#e6dfce"/><rect x="336" y="48" width="60" height="10" rx="5" fill="#c9c1ac"/><rect x="336" y="70" width="88" height="10" rx="5" fill="#c9c1ac"/><circle cx="418" cy="96" r="9" fill="#c9c1ac"/><rect x="460" y="30" width="120" height="90" rx="12" fill="#e6dfce"/><rect x="476" y="48" width="60" height="10" rx="5" fill="#c9c1ac"/><rect x="476" y="70" width="88" height="10" rx="5" fill="#c9c1ac"/><circle cx="558" cy="96" r="9" fill="#c9c1ac"/><rect x="600" y="30" width="120" height="90" rx="12" fill="#e6dfce"/><rect x="616" y="48" width="60" height="10" rx="5" fill="#c9c1ac"/><rect x="616" y="70" width="88" height="10" rx="5" fill="#c9c1ac"/><circle cx="698" cy="96" r="9" fill="#c9c1ac"/><rect x="40" y="140" width="120" height="90" rx="12" fill="#e6dfce"/><rect x="56" y="158" width="60" height="10" rx="5" fill="#c9c1ac"/><rect x="56" y="180" width="88" height="10" rx="5" fill="#c9c1ac"/><circle cx="138" cy="206" r="9" fill="#c9c1ac"/><rect x="180" y="140" width="120" height="90" rx="12" fill="#e6dfce"/><rect x="196" y="158" width="60" height="10" rx="5" fill="#c9c1ac"/><rect x="196" y="180" width="88" height="10" rx="5" fill="#c9c1ac"/><circle cx="278" cy="206" r="9" fill="#c9c1ac"/><rect x="460" y="140" width="120" height="90" rx="12" fill="#e6dfce"/><rect x="476" y="158" width="60" height="10" rx="5" fill="#c9c1ac"/><rect x="476" y="180" width="88" height="10" rx="5" fill="#c9c1ac"/><circle cx="558" cy="206" r="9" fill="#c9c1ac"/><rect x="600" y="140" width="120" height="90" rx="12" fill="#e6dfce"/><rect x="616" y="158" width="60" height="10" rx="5" fill="#c9c1ac"/><rect x="616" y="180" width="88" height="10" rx="5" fill="#c9c1ac"/><circle cx="698" cy="206" r="9" fill="#c9c1ac"/><rect x="40" y="250" width="120" height="90" rx="12" fill="#e6dfce"/><rect x="56" y="268" width="60" height="10" rx="5" fill="#c9c1ac"/><rect x="56" y="290" width="88" height="10" rx="5" fill="#c9c1ac"/><circle cx="138" cy="316" r="9" fill="#c9c1ac"/><rect x="180" y="250" width="120" height="90" rx="12" fill="#e6dfce"/><rect x="196" y="268" width="60" height="10" rx="5" fill="#c9c1ac"/><rect x="196" y="290" width="88" height="10" rx="5" fill="#c9c1ac"/><circle cx="278" cy="316" r="9" fill="#c9c1ac"/><rect x="320" y="250" width="120" height="90" rx="12" fill="#e6dfce"/><rect x="336" y="268" width="60" height="10" rx="5" fill="#c9c1ac"/><rect x="336" y="290" width="88" height="10" rx="5" fill="#c9c1ac"/><circle cx="418" cy="316" r="9" fill="#c9c1ac"/><rect x="460" y="250" width="120" height="90" rx="12" fill="#e6dfce"/><rect x="476" y="268" width="60" height="10" rx="5" fill="#c9c1ac"/><rect x="476" y="290" width="88" height="10" rx="5" fill="#c9c1ac"/><circle cx="558" cy="316" r="9" fill="#c9c1ac"/><rect x="600" y="250" width="120" height="90" rx="12" fill="#e6dfce"/><rect x="616" y="268" width="60" height="10" rx="5" fill="#c9c1ac"/><rect x="616" y="290" width="88" height="10" rx="5" fill="#c9c1ac"/><circle cx="698" cy="316" r="9" fill="#c9c1ac"/><rect x="40" y="360" width="120" height="90" rx="12" fill="#e6dfce"/><rect x="56" y="378" width="60" height="10" rx="5" fill="#c9c1ac"/><rect x="56" y="400" width="88" height="10" rx="5" fill="#c9c1ac"/><circle cx="138" cy="426" r="9" fill="#c9c1ac"/><rect x="180" y="360" width="120" height="90" rx="12" fill="#e6dfce"/><rect x="196" y="378" width="60" height="10" rx="5" fill="#c9c1ac"/><rect x="196" y="400" width="88" height="10" rx="5" fill="#c9c1ac"/><circle cx="278" cy="426" r="9" fill="#c9c1ac"/><rect x="320" y="360" width="120" height="90" rx="12" fill="#e6dfce"/><rect x="336" y="378" width="60" height="10" rx="5" fill="#c9c1ac"/><rect x="336" y="400" width="88" height="10" rx="5" fill="#c9c1ac"/><circle cx="418" cy="426" r="9" fill="#c9c1ac"/><rect x="460" y="360" width="120" height="90" rx="12" fill="#e6dfce"/><rect x="476" y="378" width="60" height="10" rx="5" fill="#c9c1ac"/><rect x="476" y="400" width="88" height="10" rx="5" fill="#c9c1ac"/><circle cx="558" cy="426" r="9" fill="#c9c1ac"/><rect x="600" y="360" width="120" height="90" rx="12" fill="#e6dfce"/><rect x="616" y="378" width="60" height="10" rx="5" fill="#c9c1ac"/><rect x="616" y="400" width="88" height="10" rx="5" fill="#c9c1ac"/><circle cx="698" cy="426" r="9" fill="#c9c1ac"/><rect x="302" y="126" width="156" height="118" rx="16" fill="#DAA761" stroke="#141414" stroke-width="4"/><rect x="324" y="150" width="80" height="12" rx="6" fill="#141414"/><rect x="324" y="178" width="112" height="12" rx="6" fill="#141414" opacity=".7"/><circle cx="424" cy="216" r="12" fill="#141414"/></svg><div class="sub">الكل ينزّل عروضه بنفس الأسبوع.<br><b>اللي يبدأ بدري ويكرر رسالته، هو اللي يُتذكّر.</b></div></div>
 <div class="foot"><div class="progress"><span class=""></span><span class="on"></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span></div><div class="handle">@lumera.advertising</div></div>
 </div>
-<div class="slide" id="s3">
-<div class="logo-slot"><!-- مساحة الشعار الرسمي: أضفه لاحقاً (270px عرض، 80px هامش علوي) --></div>
-<div class="content"><h2 class="t3">الخطة في 4 خطوات</h2><div class="list"><div class="li"><div class="num">1</div><div class="it">اختر عرضاً واحداً واضحاً، مو عشرة عروض</div></div><div class="li"><div class="num">2</div><div class="it">حدد منو جمهورك وفي أي منطقة</div></div><div class="li"><div class="num">3</div><div class="it">ابدأ التشويق قبل الموسم بأسبوعين</div></div><div class="li"><div class="num">4</div><div class="it">كرر نفس الرسالة في أكثر من مكان</div></div></div></div>
+<div class="slide light" id="s3">
+<div class="logo-slot"><!-- مساحة الشعار الرسمي: أضفه لاحقاً --></div>
+<div class="content"><h2 class="t3">الخطة في 4 خطوات</h2><div class="cards"><div class="card"><div class="cnum">01</div><div class="cic"><svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12V4h8l10 10-8 8L3 12z"/><circle cx="7.5" cy="8.5" r="1.5"/></svg></div><div class="ctx"><div class="ct">عرض واحد واضح</div><div class="cd">مو عشرة عروض تلخبط الزبون</div></div></div><div class="card"><div class="cnum">02</div><div class="cic"><svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg></div><div class="ctx"><div class="ct">حدد جمهورك ومنطقتك</div><div class="cd">منو تبي توصل له وين؟</div></div></div><div class="card"><div class="cnum">03</div><div class="cic"><svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></div><div class="ctx"><div class="ct">ابدأ التشويق بدري</div><div class="cd">قبل الموسم بأسبوعين</div></div></div><div class="card"><div class="cnum">04</div><div class="cic"><svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4M3 11V9a3 3 0 013-3h15M7 22l-4-4 4-4M21 13v2a3 3 0 01-3 3H3"/></svg></div><div class="ctx"><div class="ct">كرر نفس الرسالة</div><div class="cd">في أكثر من مكان</div></div></div></div></div>
 <div class="foot"><div class="progress"><span class=""></span><span class=""></span><span class="on"></span><span class=""></span><span class=""></span><span class=""></span></div><div class="handle">@lumera.advertising</div></div>
 </div>
-<div class="slide" id="s4">
-<div class="logo-slot"><!-- مساحة الشعار الرسمي: أضفه لاحقاً (270px عرض، 80px هامش علوي) --></div>
-<div class="content"><h2 class="t3">جدولك الزمني</h2><div class="list"><div class="li"><div class="num">1</div><div class="it">قبل أسبوعين: تشويق بدون كشف العرض</div></div><div class="li"><div class="num">2</div><div class="it">قبل أسبوع: أعلن العرض بصيغة بسيطة</div></div><div class="li"><div class="num">3</div><div class="it">أسبوع الجمعة البيضاء: ذكّر وكرر</div></div><div class="li"><div class="num">4</div><div class="it">بعد الموسم: اشكر عملاءك وابنِ علاقة</div></div></div></div>
+<div class="slide dark" id="s4">
+<div class="logo-slot"><!-- مساحة الشعار الرسمي: أضفه لاحقاً --></div>
+<div class="content"><h2 class="t3 lt">جدولك الزمني</h2><div class="tlist"><div class="tline"></div><div class="tl"><div class="tlic"><svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></div><div class="tltx"><div class="tlw">قبل أسبوعين</div><div class="tlt">تشويق بدون كشف العرض</div></div></div><div class="tl"><div class="tlic"><svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10v4h4l8 5V5L7 10H3z"/><path d="M18 8c1.5 1.5 1.5 6.5 0 8"/></svg></div><div class="tltx"><div class="tlw">قبل أسبوع</div><div class="tlt">أعلن العرض بصيغة بسيطة</div></div></div><div class="tl"><div class="tlic"><svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4M3 11V9a3 3 0 013-3h15M7 22l-4-4 4-4M21 13v2a3 3 0 01-3 3H3"/></svg></div><div class="tltx"><div class="tlw">أسبوع الجمعة البيضاء</div><div class="tlt">ذكّر وكرر رسالتك</div></div></div><div class="tl"><div class="tlic"><svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-8-5-8-11a4.5 4.5 0 018-2.5A4.5 4.5 0 0120 10c0 6-8 11-8 11z"/></svg></div><div class="tltx"><div class="tlw">بعد الموسم</div><div class="tlt">اشكر عملاءك وابنِ علاقة</div></div></div></div></div>
 <div class="foot"><div class="progress"><span class=""></span><span class=""></span><span class=""></span><span class="on"></span><span class=""></span><span class=""></span></div><div class="handle">@lumera.advertising</div></div>
 </div>
-<div class="slide" id="s5">
-<div class="logo-slot"><!-- مساحة الشعار الرسمي: أضفه لاحقاً (270px عرض، 80px هامش علوي) --></div>
-<div class="content"><div class="big">🔖</div><h2>احفظ المنشور<br>وارجع له قبل الموسم</h2><div class="sub">وشاركه مع صاحب مشروع يحتاجه</div><div class="tag">نصنع حضورك… ونترك بصمتك.</div></div>
+<div class="slide gold" id="s5">
+<div class="logo-slot"><!-- مساحة الشعار الرسمي: أضفه لاحقاً --></div>
+<div class="content"><div class="bigic"><svg width="230" height="230" viewBox="0 0 24 24" fill="none" stroke="#141414" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-6-4-6 4V3z"/></svg></div><h2 class="dk">احفظ المنشور<br>وارجع له قبل الموسم</h2><div class="sub dk">وشاركه مع صاحب مشروع يحتاجه</div><div class="tag dk">نصنع حضورك… ونترك بصمتك.</div></div>
 <div class="foot"><div class="progress"><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class="on"></span><span class=""></span></div><div class="handle">@lumera.advertising</div></div>
 </div>
-<div class="slide" id="s6">
-<div class="logo-slot"><!-- مساحة الشعار الرسمي: أضفه لاحقاً (270px عرض، 80px هامش علوي) --></div>
-<div class="content"><div class="big">💬</div><h2>شنو عرضك<br>للجمعة البيضاء؟</h2><div class="sub">اكتبه في التعليقات،<br>وخلّنا نشوف أفكار الشباب</div><div class="tag">Built to be seen. Created to be remembered.</div></div>
+<div class="slide dark" id="s6">
+<div class="logo-slot"><!-- مساحة الشعار الرسمي: أضفه لاحقاً --></div>
+<div class="content"><svg width="760" height="380" viewBox="0 0 760 380" fill="none">
+<rect x="40" y="20" width="420" height="120" rx="40" fill="#F5F1E8"/><rect x="80" y="55" width="260" height="14" rx="7" fill="#141414"/><rect x="80" y="85" width="180" height="14" rx="7" fill="#141414" opacity=".5"/>
+<rect x="300" y="170" width="420" height="120" rx="40" fill="#DAA761"/><rect x="340" y="205" width="260" height="14" rx="7" fill="#141414"/><rect x="340" y="235" width="140" height="14" rx="7" fill="#141414" opacity=".6"/>
+<rect x="40" y="320" width="300" height="56" rx="28" fill="#2a2a2a"/><circle cx="90" cy="348" r="8" fill="#DAA761"/><circle cx="125" cy="348" r="8" fill="#DAA761" opacity=".6"/><circle cx="160" cy="348" r="8" fill="#DAA761" opacity=".3"/>
+</svg><h2 class="lt">شنو عرضك<br>للجمعة البيضاء؟</h2><div class="sub lt">اكتبه في التعليقات،<br>وخلّنا نشوف أفكار الشباب</div><div class="tag lt" dir="ltr">Built to be seen. Created to be remembered.</div></div>
 <div class="foot"><div class="progress"><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class="on"></span></div><div class="handle">@lumera.advertising</div></div>
 </div>
 
