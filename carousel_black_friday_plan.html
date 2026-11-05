@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html-to-image/1.11.11/html-to-image.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;700&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#141414;font-family:'IBM Plex Sans Arabic',Tahoma,Arial,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;gap:24px;padding:24px 0;}
+.slide{width:1080px;height:1350px;background:#F5F1E8;display:none;flex-direction:column;overflow:hidden;color:#141414;}
+.slide.active{display:flex;}
+.logo-slot{height:115px;margin-top:80px;flex-shrink:0;}
+.content{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 100px;text-align:center;}
+.kicker{font-size:34px;color:#6b665c;margin-bottom:48px;font-weight:500;}
+h1{font-size:96px;font-weight:500;line-height:1.35;}
+h2{font-size:84px;font-weight:500;line-height:1.35;margin-bottom:40px;}
+.t3{margin-bottom:70px;}
+.hl{background:#DAA761;color:#141414;padding:0 18px;border-radius:6px;}
+.sub{font-size:40px;line-height:1.7;color:#3a3a3a;margin-top:30px;font-weight:400;}
+.big{font-size:140px;margin-bottom:30px;}
+.arrow{margin-top:70px;width:96px;height:96px;border-radius:50%;background:#141414;color:#DAA761;font-size:48px;display:flex;align-items:center;justify-content:center;}
+.list{width:100%;}
+.li{display:flex;align-items:center;gap:32px;margin-bottom:44px;}
+.num{width:84px;height:84px;border-radius:50%;background:#DAA761;color:#141414;font-size:40px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'IBM Plex Sans',sans-serif;}
+.it{font-size:42px;line-height:1.5;text-align:right;flex:1;font-weight:500;}
+.tag{margin-top:60px;font-size:36px;color:#141414;border-top:3px solid #DAA761;padding-top:28px;font-weight:500;}
+.foot{padding:0 100px 70px;display:flex;align-items:center;justify-content:space-between;}
+.progress{display:flex;gap:10px;}
+.progress span{width:44px;height:8px;border-radius:4px;background:#d9d3c4;}
+.progress span.on{background:#DAA761;}
+.handle{font-size:28px;color:#6b665c;direction:ltr;font-family:'IBM Plex Sans',sans-serif;}
+.nav{display:flex;gap:20px;align-items:center;flex-wrap:wrap;justify-content:center;}
+.nav-btn{background:#333;border:none;color:#fff;font-size:32px;width:72px;height:72px;border-radius:50%;cursor:pointer;}
+.nav-info{color:#888;font-size:24px;}
+.dl-btn{background:#DAA761;border:none;border-radius:20px;padding:16px 40px;color:#141414;font-size:24px;font-weight:700;cursor:pointer;}
+.dl-all-btn{background:#1a1a1a;border:2px solid #DAA761;border-radius:20px;padding:16px 40px;color:#fff;font-size:24px;font-weight:700;cursor:pointer;}
+</style>
+</head>
+<body>
+<div class="slide active" id="s1">
+<div class="logo-slot"><!-- مساحة الشعار الرسمي: أضفه لاحقاً (270px عرض، 80px هامش علوي) --></div>
+<div class="content"><div class="kicker">لأصحاب المشاريع الصغيرة في البحرين</div><h1>خطة إعلان بسيطة<br>قبل <span class="hl">الجمعة البيضاء</span></h1><div class="sub">4 خطوات تبدأ فيها من الحين</div><div class="arrow">←</div></div>
+<div class="foot"><div class="progress"><span class="on"></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span></div><div class="handle">@lumera.advertising</div></div>
+</div>
+<div class="slide" id="s2">
+<div class="logo-slot"><!-- مساحة الشعار الرسمي: أضفه لاحقاً (270px عرض، 80px هامش علوي) --></div>
+<div class="content"><div class="big">🤔</div><h2>ليش عروضك<br>ما توصل لناس؟</h2><div class="sub">في موسم الجمعة البيضاء الكل ينزّل عروضه بنفس الوقت.<br>اللي يبدأ بدري ويكرر رسالته، هو اللي يُتذكّر.</div></div>
+<div class="foot"><div class="progress"><span class=""></span><span class="on"></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span></div><div class="handle">@lumera.advertising</div></div>
+</div>
+<div class="slide" id="s3">
+<div class="logo-slot"><!-- مساحة الشعار الرسمي: أضفه لاحقاً (270px عرض، 80px هامش علوي) --></div>
+<div class="content"><h2 class="t3">الخطة في 4 خطوات</h2><div class="list"><div class="li"><div class="num">1</div><div class="it">اختر عرضاً واحداً واضحاً، مو عشرة عروض</div></div><div class="li"><div class="num">2</div><div class="it">حدد منو جمهورك وفي أي منطقة</div></div><div class="li"><div class="num">3</div><div class="it">ابدأ التشويق قبل الموسم بأسبوعين</div></div><div class="li"><div class="num">4</div><div class="it">كرر نفس الرسالة في أكثر من مكان</div></div></div></div>
+<div class="foot"><div class="progress"><span class=""></span><span class=""></span><span class="on"></span><span class=""></span><span class=""></span><span class=""></span></div><div class="handle">@lumera.advertising</div></div>
+</div>
+<div class="slide" id="s4">
+<div class="logo-slot"><!-- مساحة الشعار الرسمي: أضفه لاحقاً (270px عرض، 80px هامش علوي) --></div>
+<div class="content"><h2 class="t3">جدولك الزمني</h2><div class="list"><div class="li"><div class="num">1</div><div class="it">قبل أسبوعين: تشويق بدون كشف العرض</div></div><div class="li"><div class="num">2</div><div class="it">قبل أسبوع: أعلن العرض بصيغة بسيطة</div></div><div class="li"><div class="num">3</div><div class="it">أسبوع الجمعة البيضاء: ذكّر وكرر</div></div><div class="li"><div class="num">4</div><div class="it">بعد الموسم: اشكر عملاءك وابنِ علاقة</div></div></div></div>
+<div class="foot"><div class="progress"><span class=""></span><span class=""></span><span class=""></span><span class="on"></span><span class=""></span><span class=""></span></div><div class="handle">@lumera.advertising</div></div>
+</div>
+<div class="slide" id="s5">
+<div class="logo-slot"><!-- مساحة الشعار الرسمي: أضفه لاحقاً (270px عرض، 80px هامش علوي) --></div>
+<div class="content"><div class="big">🔖</div><h2>احفظ المنشور<br>وارجع له قبل الموسم</h2><div class="sub">وشاركه مع صاحب مشروع يحتاجه</div><div class="tag">نصنع حضورك… ونترك بصمتك.</div></div>
+<div class="foot"><div class="progress"><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class="on"></span><span class=""></span></div><div class="handle">@lumera.advertising</div></div>
+</div>
+<div class="slide" id="s6">
+<div class="logo-slot"><!-- مساحة الشعار الرسمي: أضفه لاحقاً (270px عرض، 80px هامش علوي) --></div>
+<div class="content"><div class="big">💬</div><h2>شنو عرضك<br>للجمعة البيضاء؟</h2><div class="sub">اكتبه في التعليقات،<br>وخلّنا نشوف أفكار الشباب</div><div class="tag">Built to be seen. Created to be remembered.</div></div>
+<div class="foot"><div class="progress"><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class=""></span><span class="on"></span></div><div class="handle">@lumera.advertising</div></div>
+</div>
+
+<div class="nav">
+<button class="nav-btn" onclick="go(-1)">‹</button>
+<span class="nav-info" id="info">1 / 6</span>
+<button class="nav-btn" onclick="go(1)">›</button>
+<button class="dl-btn" onclick="dlCurrent()">📥 حمّل الشريحة PNG</button>
+<button class="dl-all-btn" onclick="dlAll()">⬇️ حمّل الكل</button>
+</div>
+<script>
+let c=1,tot=6;
+function go(d){document.getElementById('s'+c).classList.remove('active');c=Math.max(1,Math.min(tot,c+d));document.getElementById('s'+c).classList.add('active');document.getElementById('info').textContent=c+' / '+tot;}
+function dlCurrent(){var el=document.getElementById('s'+c);htmlToImage.toPng(el,{width:1080,height:1350,pixelRatio:1}).then(function(url){var a=document.createElement('a');a.download='slide_'+c+'.png';a.href=url;a.click();});}
+async function dlAll(){var orig=c;for(var i=1;i<=tot;i++){var el=document.getElementById('s'+i);el.style.display='flex';await new Promise(r=>setTimeout(r,300));var url=await htmlToImage.toPng(el,{width:1080,height:1350,pixelRatio:1});if(i!==orig)el.style.display='none';var a=document.createElement('a');a.download='slide_'+i+'.png';a.href=url;a.click();await new Promise(r=>setTimeout(r,500));}document.getElementById('s'+orig).style.display='flex';document.getElementById('info').textContent=orig+' / '+tot;}
+</script>
+</body>
+</html>
