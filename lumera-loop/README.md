@@ -5,6 +5,10 @@
 - **النسخة القصيرة (4.5 ث):** `output/lumera-screen-loop-short-1080p.mp4` و `-720p.mp4`
   عربي 1.5 ث ← مشروبات Dream 1.5 ث ← إنجليزي 1.5 ث (كلها تصوير نهار)
 
+- **نسخة الشعار المتحرك فقط:** `output/lumera-logo-loop-1080p.mp4` و `-720p.mp4` — 7.5 ث،
+  إعلان الشعار على الخلفية البيضاء (الموجة ثم شعار LUMERA)، يبدأ وينتهي على شاشة بيضاء فاللوب سلس.
+  المقطع المصدر مو على حامل (الكاميرا تتحرك أول ثانيتين)، فنتتبّع الشاشة ونثبّتها (`scripts/track_screen.py`).
+
 ## التسلسل (نهار ← مونتاج ليلي سريع ← نهار)
 | الوقت | اللقطة | المصدر |
 |---|---|---|
@@ -24,6 +28,9 @@
 داخل شاشة تصوير الليل مع توهج خفيف حوالينها.
 
 ## إعادة الإنتاج
+```bash
+./scripts/render_logo.sh logo_clip.mp4 output   # نسخة الشعار المتحرك (Drive 13rjXqD7Mca3J2SUvPd0LSbOLget2HW7S)
+```
 ```bash
 ./scripts/render.sh day.mp4 night.mp4 quartz.mp4 output
 VARIANT=short ./scripts/render.sh day.mp4 night.mp4 quartz.mp4 output   # النسخة القصيرة
