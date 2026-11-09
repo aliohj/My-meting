@@ -1,25 +1,30 @@
 #!/usr/bin/env bash
-# Lumera screen loop: 16:9, ~7.6s, seamless loop, no audio.
+# Lumera screen loop: 16:9, ~7s, seamless loop, no audio.
 # Usage: ./render.sh <path/to/c1.mp4> <out_dir>
 #   c1.mp4 = dji_mimo_20261025_155556_0585_1793000936144_video.mp4 (Google Drive)
 set -euo pipefail
 SRC=${1:?source clip}; OUT=${2:-.}
 mkdir -p "$OUT"
-# Screen-only framing: the LED panel's 4 inner corners (measured by hand, inset
-# a few px past the bezel) are warped to fill the frame, so no wall/street shows.
-# Camera framing differs slightly before/after ~54s, so two corner sets.
-# perspective order: TL:TR:BL:BR, relative to crop=1300:800:200:500.
-EARLY="crop=1300:800:200:500,perspective=134:176:1231:91:120:687:1212:647:interpolation=cubic"
-AREEG="crop=1300:800:200:500,perspective=134:176:1219:91:120:687:1200:647:interpolation=cubic"
-LATE="crop=1300:800:200:500,perspective=73:250:1163:129:72:760:1165:681:interpolation=cubic"
+# Framing: the LED panel's 4 inner corners (TL TR BL BR, full-frame px,
+# measured by hand) are expanded by a margin through the screen's homography
+# (quad.py), then warped to fill the frame. Result: the screen is straightened
+# and centred, with its frame and a little wall visible around it.
+# Camera framing differs slightly before/after ~54s, so separate corner sets.
+MX=${MX:-0.10}; MY=${MY:-0.15}
+HERE=$(cd "$(dirname "$0")" && pwd)
+warp(){ # crop a band first (y 400..1500) to keep the warp cheap
+  local q; q=$(python3 "$HERE/quad.py" "$MX" "$MY" "$@" | awk -F: '{for(i=2;i<=NF;i+=2)$i-=400; OFS=":"; $1=$1; print}')
+  echo "crop=1728:1100:0:400,perspective=$q:interpolation=cubic"; }
+EARLY=$(warp 322 664 1445 579 308 1199 1428 1159)
+AREEG=$(warp 322 664 1433 579 308 1199 1416 1159)
+LATE=$(warp 261 736 1375 615 260 1272 1377 1193)
 V="scale=1920:1080:flags=lanczos,fps=30,setsar=1,format=yuv420p"
 # start  dur  crop    shot
 SHOTS=(
   "63.0 2.0 $LATE"   # AR: افضل عائد استثمار
-  "16.8 0.9 $EARLY"  # Green Innova
-  "22.3 0.9 $EARLY"  # Alya
-  "38.3 0.9 $EARLY"  # drinks
-  "50.3 0.9 $AREEG"  # Areeg AlSanabis
+  "22.3 1.0 $EARLY"  # Alya
+  "38.3 1.0 $EARLY"  # drinks
+  "50.3 1.0 $AREEG"  # Areeg AlSanabis
   "67.5 2.0 $LATE"   # EN: Your brand on the road
 )
 inputs=(); filt=""; i=0
