@@ -23,7 +23,12 @@ R=70; S=380   # template half-size, search half-size
 # reference frame -> corner templates
 _r=subprocess.run(["ffmpeg","-v","error","-ss",ref_t,"-i",src,"-map","0:v:0","-frames:v","1","-f","rawvideo","-pix_fmt","gray","-"],capture_output=True).stdout
 _g=np.frombuffer(_r,np.uint8).reshape(FH,FW)
-tpl=[_g[int(y)-R:int(y)+R,int(x)-R:int(x)+R].copy() for x,y in C0]
+# Templates are centred slightly OUTSIDE each corner (on the bezel/wall), so they hold the
+# bezel's outer outline and don't depend on what the screen is showing (bright ads break
+# templates that include the screen interior).
+OFF=np.array([[-55,-45],[55,-45],[-55,45],[55,45]],np.float32)
+TC=(C0+OFF).astype(int)
+tpl=[_g[y-R:y+R,x-R:x+R].copy() for x,y in TC]
 pos=C0.copy(); wr=None; n=0
 def refine(res,loc):
     x,y=loc; dx=dy=0.0
@@ -31,6 +36,7 @@ def refine(res,loc):
     if 0<y<res.shape[0]-1: a,b,c=res[y-1,x],res[y,x],res[y+1,x]; d=a-2*b+c; dy=0.5*(a-c)/d if d!=0 else 0
     return x+dx,y+dy
 log=[]
+first=True
 while True:
     buf=rd.stdout.read(fsz)
     if len(buf)<fsz: break
@@ -39,17 +45,19 @@ while True:
     if True:
         old=pos.copy()
         def match(i,half):
-            cx,cy=int(round(pos[i,0])),int(round(pos[i,1]))
+            cx,cy=int(round(pos[i,0]+OFF[i,0])),int(round(pos[i,1]+OFF[i,1]))
             x0,y0=max(cx-half,0),max(cy-half,0); x1,y1=min(cx+half,FW),min(cy+half,FH)
             res=cv2.matchTemplate(g[y0:y1,x0:x1],tpl[i],cv2.TM_CCOEFF_NORMED)
             _,mv,_,loc=cv2.minMaxLoc(res)
-            if mv>0.45:
-                px,py=refine(res,loc); pos[i]=[x0+px+R,y0+py+R]
+            if mv>0.5:
+                px,py=refine(res,loc); new=np.array([x0+px+R,y0+py+R])-OFF[i]
+                if np.abs(new-pos[i]).max()<(S if first else 40): pos[i]=new   # reject sudden jumps
         for i in (1,3): match(i,S)                 # right corners: strong edges, wide search
         # The left bezel edge is too faint to template-match reliably, and the camera here only
         # drifts/pans (right corners move together), so the whole quad follows the right side.
         d=(pos[[1,3]]-C0[[1,3]]).mean(axis=0)
         pos[0]=C0[0]+d; pos[2]=C0[2]+d
+    first=False
     H,_=cv2.findHomography(C0,pos)            # frame0 -> frameT (wall plane)
     Et=cv2.perspectiveTransform(E0[None],H)[0]
     W=cv2.getPerspectiveTransform(Et,dstq)
