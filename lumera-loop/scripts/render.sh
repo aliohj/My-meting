@@ -3,6 +3,7 @@
 #   day AR ad  ->  fast-cut night montage of client ads  ->  day EN ad
 #
 # Usage: ./render.sh <day.mp4> <night.mp4> <quartz.mp4> <out_dir>
+#        VARIANT=short ./render.sh ...   -> 4.5s: day AR -> day Dream drinks -> day EN
 #   day.mp4    = dji_mimo_20261025_155556_0585_1793000936144_video.mp4 (Drive)
 #   night.mp4  = Drive file 1IGM12R86KnsQ5f6fwQc-J4Pzdc1g4tk- (sped-up night shot)
 #   quartz.mp4 = VID-20261031-WA0139.mp4 (Quartz jewellery ad creative)
@@ -24,6 +25,7 @@ warp(){ # warp <band_w> <band_h> <band_y> x0 y0 x1 y1 x2 y2 x3 y3
   q=$(python3 "$HERE/quad.py" "$MX" "$MY" "$@" | awk -F: -v by="$by" '{for(i=2;i<=NF;i+=2)$i-=by; OFS=":"; $1=$1; print}')
   echo "crop=$bw:$bh:0:$by,perspective=$q:interpolation=cubic"; }
 DAY_LATE=$(warp 1728 1100 400  261 736 1375 615 260 1272 1377 1193)
+DAY_EARLY=$(warp 1728 1100 400 322 664 1445 579 308 1199 1428 1159)
 NIGHT_W=$(warp 1080 800 0       134 265 942 212 131 635 943 602)
 V="scale=1920:1080:flags=lanczos,fps=30,setsar=1,format=yuv420p"
 
@@ -31,6 +33,17 @@ V="scale=1920:1080:flags=lanczos,fps=30,setsar=1,format=yuv420p"
 #   day   : day clip, stabilised (vidstab tripod) — camera settles ~63.6s
 #   night : night clip (already fast-cut, sped-up footage)
 #   comp  : Quartz creative composited onto the night screen
+#   dayad : day clip, earlier camera position (client ads part), tripod-steady
+VARIANT=${VARIANT:-full}
+if [[ $VARIANT == short ]]; then
+SHOTS=(
+  "day   63.7  1.5"   # AR: افضل عائد استثمار
+  "dayad 38.3  1.5"   # Dream soft drinks (bottles -> light streaks)
+  "day   67.5  1.5"   # EN: Your brand on the road
+)
+NAME=lumera-screen-loop-short
+else
+NAME=lumera-screen-loop
 SHOTS=(
   "day   63.7  1.8"   # AR: افضل عائد استثمار
   "night 11.167 0.60" # fried chicken      (night frames 335-352)
@@ -42,6 +55,7 @@ SHOTS=(
   "comp  10.0  0.45"  # Quartz bracelet
   "day   67.5  1.8"   # EN: Your brand on the road
 )
+fi
 
 inputs=(); filt=""; i=0; n=0
 for s in "${SHOTS[@]}"; do
@@ -57,6 +71,9 @@ for s in "${SHOTS[@]}"; do
         -c:v libx264 -preset fast -crf 8 -pix_fmt yuv420p "$TMP/$i.mp4"
       inputs+=(-i "$TMP/$i.mp4")
       filt+="[$n:v]${DAY_LATE#*,},$V,trim=duration=$d,setpts=PTS-STARTPTS[v$i];"; n=$((n+1)) ;;
+    dayad)
+      inputs+=(-ss "$ss" -t "$d" -i "$DAY")
+      filt+="[$n:v]$DAY_EARLY,$V,trim=duration=$d,setpts=PTS-STARTPTS[v$i];"; n=$((n+1)) ;;
     night)
       inputs+=(-ss "$ss" -t "$d" -i "$NIGHT")
       filt+="[$n:v]$NIGHT_W,$V,trim=duration=$d,setpts=PTS-STARTPTS[v$i];"; n=$((n+1)) ;;
@@ -78,7 +95,7 @@ filt+="concat=n=$i:v=1:a=0[out]"
 
 ffmpeg -y -v error "${inputs[@]}" -filter_complex "$filt" -map "[out]" -an \
   -c:v libx264 -preset slow -crf 18 -profile:v high -pix_fmt yuv420p -movflags +faststart \
-  "$OUT/lumera-screen-loop-1080p.mp4"
-ffmpeg -y -v error -i "$OUT/lumera-screen-loop-1080p.mp4" -vf scale=1280:720:flags=lanczos -an \
+  "$OUT/$NAME-1080p.mp4"
+ffmpeg -y -v error -i "$OUT/$NAME-1080p.mp4" -vf scale=1280:720:flags=lanczos -an \
   -c:v libx264 -preset slow -crf 22 -pix_fmt yuv420p -movflags +faststart \
-  "$OUT/lumera-screen-loop-720p.mp4"
+  "$OUT/$NAME-720p.mp4"

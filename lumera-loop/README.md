@@ -2,6 +2,8 @@
 
 - `output/lumera-screen-loop-1080p.mp4` — 1920×1080، 30 إطار/ث، 7.57 ث، بدون صوت
 - `output/lumera-screen-loop-720p.mp4` — نسخة خفيفة للتطبيق
+- **النسخة القصيرة (4.5 ث):** `output/lumera-screen-loop-short-1080p.mp4` و `-720p.mp4`
+  عربي 1.5 ث ← مشروبات Dream 1.5 ث ← إنجليزي 1.5 ث (كلها تصوير نهار)
 
 ## التسلسل (نهار ← مونتاج ليلي سريع ← نهار)
 | الوقت | اللقطة | المصدر |
@@ -24,6 +26,7 @@
 ## إعادة الإنتاج
 ```bash
 ./scripts/render.sh day.mp4 night.mp4 quartz.mp4 output
+VARIANT=short ./scripts/render.sh day.mp4 night.mp4 quartz.mp4 output   # النسخة القصيرة
 ```
 - day.mp4: `dji_mimo_20261025_155556_0585_1793000936144_video.mp4` (Drive)
 - night.mp4: ملف Drive `1IGM12R86KnsQ5f6fwQc-J4Pzdc1g4tk-`
