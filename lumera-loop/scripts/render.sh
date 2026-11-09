@@ -22,9 +22,7 @@ V="scale=1920:1080:flags=lanczos,fps=30,setsar=1,format=yuv420p"
 # start  dur  crop    shot
 SHOTS=(
   "63.0 2.0 $LATE"   # AR: افضل عائد استثمار
-  "22.3 1.0 $EARLY"  # Alya
-  "38.3 1.0 $EARLY"  # drinks
-  "50.3 1.0 $AREEG"  # Areeg AlSanabis
+  "38.3 3.0 $EARLY"  # Dream soft drinks
   "67.5 2.0 $LATE"   # EN: Your brand on the road
 )
 inputs=(); filt=""; i=0
