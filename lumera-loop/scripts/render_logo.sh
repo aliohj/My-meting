@@ -24,3 +24,12 @@ ffmpeg -y -v error -i "$OUT/.tmp-logo.mp4" -an -vf "setpts=PTS/1.45,fps=30" -t 5
 ffmpeg -y -v error -i "$OUT/lumera-logo-loop-5s-1080p.mp4" -vf scale=1280:720:flags=lanczos -an \
   -c:v libx264 -preset slow -crf 22 -pix_fmt yuv420p -movflags +faststart "$OUT/lumera-logo-loop-5s-720p.mp4"
 rm -f "$OUT/.tmp-logo.mp4"
+
+# Fast version: same trimmed window, 2x speed (~3.6s). Loops cleanly (white -> white).
+python3 "$HERE/track_screen.py" "$SRC" "$OUT/.tmp-logo.mp4" 5.0 7.25 0.10 0.15 10.6 \
+  358,797 1475,714 345,1328 1460,1292
+ffmpeg -y -v error -i "$OUT/.tmp-logo.mp4" -an -vf "setpts=PTS/2,fps=30" \
+  -c:v libx264 -preset slow -crf 18 -profile:v high -pix_fmt yuv420p -movflags +faststart "$OUT/lumera-logo-loop-fast-1080p.mp4"
+ffmpeg -y -v error -i "$OUT/lumera-logo-loop-fast-1080p.mp4" -vf scale=1280:720:flags=lanczos -an \
+  -c:v libx264 -preset slow -crf 22 -pix_fmt yuv420p -movflags +faststart "$OUT/lumera-logo-loop-fast-720p.mp4"
+rm -f "$OUT/.tmp-logo.mp4"
