@@ -14,3 +14,13 @@ python3 "$HERE/track_screen.py" "$SRC" "$OUT/lumera-logo-loop-1080p.mp4" 4.75 7.
   358,797 1475,714 345,1328 1460,1292
 ffmpeg -y -v error -i "$OUT/lumera-logo-loop-1080p.mp4" -vf scale=1280:720:flags=lanczos -an \
   -c:v libx264 -preset slow -crf 22 -pix_fmt yuv420p -movflags +faststart "$OUT/lumera-logo-loop-720p.mp4"
+
+# 5s version: drop the empty white lead-in (first 0.25s), then play the rest 1.45x faster.
+# Still starts/ends on plain white, so it still loops cleanly.
+python3 "$HERE/track_screen.py" "$SRC" "$OUT/.tmp-logo.mp4" 5.0 7.25 0.10 0.15 10.6 \
+  358,797 1475,714 345,1328 1460,1292
+ffmpeg -y -v error -i "$OUT/.tmp-logo.mp4" -an -vf "setpts=PTS/1.45,fps=30" -t 5 \
+  -c:v libx264 -preset slow -crf 18 -profile:v high -pix_fmt yuv420p -movflags +faststart "$OUT/lumera-logo-loop-5s-1080p.mp4"
+ffmpeg -y -v error -i "$OUT/lumera-logo-loop-5s-1080p.mp4" -vf scale=1280:720:flags=lanczos -an \
+  -c:v libx264 -preset slow -crf 22 -pix_fmt yuv420p -movflags +faststart "$OUT/lumera-logo-loop-5s-720p.mp4"
+rm -f "$OUT/.tmp-logo.mp4"
