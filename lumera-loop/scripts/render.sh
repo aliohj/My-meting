@@ -21,14 +21,27 @@ LATE=$(warp 261 736 1375 615 260 1272 1377 1193)
 V="scale=1920:1080:flags=lanczos,fps=30,setsar=1,format=yuv420p"
 # start  dur  crop    shot
 SHOTS=(
-  "63.0 2.0 $LATE"   # AR: افضل عائد استثمار
+  "63.7 2.0 $LATE stab"  # AR: افضل عائد استثمار (camera settles ~63.6s)
   "38.3 3.0 $EARLY"  # Dream soft drinks
-  "67.5 2.0 $LATE"   # EN: Your brand on the road
+  "67.5 2.0 $LATE stab"  # EN: Your brand on the road
 )
+TMP=$(mktemp -d); trap 'rm -rf "$TMP"' EXIT
+BAND="crop=1728:1100:0:400"
 inputs=(); filt=""; i=0
 for s in "${SHOTS[@]}"; do
-  read -r ss d c <<<"$s"
-  inputs+=(-ss "$ss" -t "$d" -i "$SRC")
+  read -r ss d c stab <<<"$s"
+  if [[ "${stab:-}" == stab ]]; then
+    # Lock the camera: vidstab in tripod mode (every frame aligned to the first),
+    # run on the screen/wall band only so passing cars don't affect it.
+    ffmpeg -y -v error -ss "$ss" -t "$d" -i "$SRC" \
+      -vf "$BAND,vidstabdetect=tripod=1:shakiness=4:accuracy=15:result=$TMP/$i.trf" -f null -
+    ffmpeg -y -v error -ss "$ss" -t "$d" -i "$SRC" \
+      -vf "$BAND,vidstabtransform=tripod=1:input=$TMP/$i.trf:optzoom=0:crop=keep:interpol=bicubic" \
+      -c:v libx264 -preset fast -crf 8 -pix_fmt yuv420p "$TMP/$i.mp4"
+    inputs+=(-i "$TMP/$i.mp4"); c=${c#"$BAND,"}
+  else
+    inputs+=(-ss "$ss" -t "$d" -i "$SRC")
+  fi
   filt+="[$i:v]$c,$V,trim=duration=$d,setpts=PTS-STARTPTS[v$i];"
   i=$((i+1))
 done
