@@ -10,7 +10,7 @@ SRC=${1:?clip}; OUT=${2:-.}; mkdir -p "$OUT"
 HERE=$(cd "$(dirname "$0")" && pwd)
 TMP=$(mktemp -d); trap 'rm -rf "$TMP"' EXIT
 # track + straighten the screen (ref pose t=33.5); b.mp4 time 0 = source 28.55s
-python3 "$HERE/track_screen.py" "$SRC" "$TMP/b.mp4" 28.55 8.2 0.10 0.15 33.5 462,797 1582,716 444,1327 1565,1291
+CLEAN=1 python3 "$HERE/track_screen.py" "$SRC" "$TMP/b.mp4" 28.55 8.2 0.10 0.15 33.5 462,797 1582,716 444,1327 1565,1291
 # scene list (b.mp4 time, duration):
 #   apple glow -> flying apples | ribbon splash | bottle tilt | burst reveals bottle
 #   | label close-up | splash with apple | hero shot            = 5.0s
